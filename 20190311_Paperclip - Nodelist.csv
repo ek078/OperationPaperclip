@@ -1,0 +1,143 @@
+id,name,type,study,promotion
+Braun,Wernher von Braun,0,1,1
+Debus,Kurt Debus,0,1,1
+Rudolph ,Arthur Rudolph,0,1,0
+Rickhey,Georg Rickhey,0,1,0
+Dornberger,Walter Dornberger,0,1,0
+Strughold,Hubertus Strughold,0,0,1
+Kuettner,Joachim Kuettner,0,1,1
+NSDAP,NSDAP,1,NA,NA
+SS,SS,1,NA,NA
+SA,SA,1,NA,NA
+Gestapo,Gestapo,1,NA,NA
+NASA,NASA,1,NA,NA
+V2,V2,1,NA,NA
+US Army,US Army,1,NA,NA
+Redstone,Redstone,1,NA,NA
+Jupiter,Jupiter,1,NA,NA
+Mercury,Mercury,1,NA,NA
+Gemini,Gemini,1,NA,NA
+Apollo,Apollo,1,NA,NA
+Saturn,Saturn,1,NA,NA
+Berlin,Berlin,1,NA,NA
+Peenemuende,Peenemuende,1,NA,NA
+Mittelbau-Dora,Mittelbau-Dora,1,NA,NA
+Fort Bliss,Fort Bliss,1,NA,NA
+Huntsville,Huntsville,1,NA,NA
+Verein fuer Raumschifffahrt,Verein fuer Raumschifffahrt,1,NA,NA
+Mitglied,Mitglied,1,NA,NA
+technischer Direktor,technischer Direktor,1,NA,NA
+Berater,Berater,1,NA,NA
+Entwickler,Entwickler,1,NA,NA
+Direktor MSFC,Direktor MSFC,1,NA,NA
+Leitung,Leitung,1,NA,NA
+Mitglied,Mitglied,1,NA,NA
+US Navy,US Navy,1,NA,NA
+Entwickler Raketenmotoren,Entwickler Raketenmotoren,1,NA,NA
+Forschung und Entwicklung,Forschung und Entwicklung,1,NA,NA
+Chefdesigner + Leiter technisches Konstruktionsbuero V2,Chefdesigner + Leiter technisches Konstruktionsbuero V2,1,NA,NA
+Beaufsichtiger bei Verlegung nach Ebensee,Beaufsichtiger bei Verlegung nach Ebensee,1,NA,NA
+Gefangener US-Armee,Gefangener US-Armee,1,NA,NA
+Stellvertreter Brauns,Stellvertreter Brauns,1,NA,NA
+Betriebsdirektor,Betriebsdirektor,1,NA,NA
+Produktionsdirektor,Produktionsdirektor,1,NA,NA
+Berater,Berater,1,NA,NA
+Stellvertreter Brauns,Stellvertreter Brauns,1,NA,NA
+stellvertretender Direktor,stellvertretender Direktor,1,NA,NA
+Stellvertreter Brauns,Stellvertreter Brauns,1,NA,NA
+Verantwortlicher Saturn-Raketen,Verantwortlicher Saturn-Raketen,1,NA,NA
+Direktor MSFC,Direktor MSFC,1,NA,NA
+Tessmann,Bernhard Tessmann,0,NA,NA
+Rees,Eberhard Rees,0,1,0
+Riedel,Walter Riedel,0,1,1
+Cape Canaveral,Cape Canaveral,1,NA,NA
+Ueberwacher,Ueberwacher,1,NA,NA
+Kennedy Space Center,Kennedy Space Center,1,NA,NA
+ABMA,ABMA,1,NA,NA
+Houston,Houston,1,NA,NA
+Koelpinsee,Koelpinsee,1,NA,NA
+Deputy Director,Deputy Director,1,NA,NA
+Ueberwacher Konstruktion Maschinentests,Uberwacher Konstruktion Maschinentests,1,NA,NA
+White Sands Missile Range,White Sands Missile Range,1,NA,NA
+Huzel,Dieter Huzel,0,1,0
+Leiter V2-Pruefstand,Leiter V2-Pruefstand,0,NA,NA
+Assistent Brauns,Assistent Brauns,0,NA,NA
+North Amercian Aviation,North American Aviation,0,NA,NA
+Triebswerkentwicklung Redstone,Triebswerkentwicklung Redstone,0,NA,NA
+Los Angeles,Los Angeles,0,NA,NA
+Benzinger,Theodor Benzinger,0,1,1
+Flugmedizinisches Institut,Flugmedizinisches Institut,1,NA,NA
+Rechlin,Rechlin,1,NA,NA
+Deutsche Akademie fuer Luftfahrtforschung,Deutsche Akademie fuer Luftfahrtforschung,1,NA,NA
+Obermedizinalrat,Obermedizinalrat,1,NA,NA
+Randolph Air Force Base,Randolph Air Force Base,1,NA,NA
+NMRI,NMRI,1,NA,NA
+NIST,NIST,1,NA,NA
+Gaithersburg,Gaithersburg,1,NA,NA
+Bethesda,Bethesda,1,NA,NA
+Schaefer,Konrad Schaefer,0,1,1
+Schering AG,Schering AG,1,NA,NA
+Assistent Chemotherapeutisches Laboratorium,Assistent Chemotherapeutisches Laboratorium,1,NA,NA
+Referent Menschenversuche,Referent Menschenversuche,1,NA,NA
+Jueterborg,Jueterborg,1,NA,NA
+Luftwaffe,Luftwaffe,1,NA,NA
+Forschungsinstitut fuer Luftfahrtmedizin,Forschungsinstitut fuer Luftfahrtmedizin,1,NA,NA
+Ruff,Siegfried Ruff,0,1,1
+Deutsche Versuchsanstalt fuer Luftfahrt,Deutsche Versuchsanstalt fuer Luftfahrt,1,NA,NA
+Direktor Institut fuer Flugmedizin,Direktor Institut fuer Flugmedizin,1,NA,NA
+KZ Dachau,KZ Dachau,1,NA,NA
+Dachau,Dachau,1,NA,NA
+Heidelberg,Heidelberg,1,NA,NA
+Aero Medical Center,Aero Medical Center,1,NA,NA
+Forscher,Forscher,1,NA,NA
+Institut fuer Flugmedizin der deutschen Versuchsanstalt,Institut fuer Flugmedizin der deutschen Versuchsanstalt,1,NA,NA
+Bonn,Bonn,1,NA,NA
+Leiter,Leiter,1,NA,NA
+Professor,Professor,1,NA,NA
+Mitarbeiter Sanitaetsversuchs-und Lehrabteilung,Mitarbeiter Sanitaetsversuchs-und Lehrabteilung,1,NA,NA
+Stipendium,Stipendium,1,NA,NA
+Rockefeller Foundation,Rockefeller Foundation,1,NA,NA
+Direktor des Physiologischen Instituts,Direktor des Physiologischen Instituts,1,NA,NA
+Universitaet Heidelberg,Universitaet Heidelberg,1,NA,NA
+Reichsluftfahrtministerium,Reichsluftfahrtministerium,1,NA,NA
+Chicago + Cleveland,Chicago + Cleveland,1,NA,NA
+US Airforce-Aviation-University,US Airforce-Aviation-University,1,NA,NA
+Institut fuer Weltraummedizin,Institut fuer Weltraummedizin,1,NA,NA
+Direktor Aerospace Medical Division,Direktor Aerospace Medical Division,1,NA,NA
+Technische Hochschule Darmstadt,Technische Hochschule Darmstadt,1,NA,NA
+Burschenschaft Markommannia,Burschenschaft Markommannia,1,NA,NA
+Pruefstand VII,Pruefstand VII,1,NA,NA
+Operation Backfire,Operation Backfire,1,NA,NA
+Darmstadt,Darmstadt,1,NA,NA
+Student,Student,1,NA,NA
+Wissenschaftlicher Mitarbeiter,Wissenschaftlicher Mitarbeiter,1,NA,NA
+Launch Operations Center,Launch Operations Center,1,NA,NA
+OTRAG,OTRAG,1,NA,NA
+Stuttgart,Stuttgart,1,NA,NA
+Firechief,Firechief,1,NA,NA
+Assistenz des Technischen Direktors,Assistenz des Technischen Direktors,1,NA,NA
+Kriegsgefangener,Kriegsgefangener,1,NA,NA
+Skylab,Skylab,1,NA,NA
+Kooperation,Kooperation,1,NA,NA
+Entwicklungsingenieur,Entwicklungsingenieur,1,NA,NA
+NAOE,NAOE,1,NA,NA
+Washington D.C.,Washington D.C.,1,NA,NA
+Messerschmitt AG,Messerschmitt AG,1,NA,NA
+Forschungsstation Zugspitze,Forschungsstation Zugspitze,1,NA,NA
+Geophysical Research Directorate,Geophysical Research Directorate,1,NA,NA
+University of California,University of California,1,NA,NA
+Augsburg,Augsburg,1,NA,NA
+Zugspitze,Zugspitze,1,NA,NA
+Cambridge,Cambridge,1,NA,NA
+Oakland,Oakland,1,NA,NA
+Testpilot,Testpilot,1,NA,NA
+Vorsitzender,Vorsitzender,1,NA,NA
+Tiesenhausen,Georg von Tiesenhausen,0,1,1
+Ingenieurschule Hamburg,Ingenieurschule Hamburg,1,NA,NA
+Test Stand 12,Test Stand 12,1,NA,NA
+Hatlapa,Hatlapa,1,NA,NA
+Pinneberg,Pinneberg,1,NA,NA
+Hamburg,Hamburg,1,NA,NA
+Marshall Space Flight Center,Marshall Space Flight Center,1,NA,NA
+Advanced Systems Office,Advanced Systems Office,1,NA,NA
+Future Launch Systems Study Office,Future Launch Systems Study Office,1,NA,NA
