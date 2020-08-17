@@ -1,0 +1,805 @@
+---
+  title: "Das Geheimprojekt Operation Paperclip"
+author: "Team Paperclip"
+date: "30 04 2019"
+output:
+  pdf_document: default
+html_document: default
+---
+50 Jahre Mondlandung: Die technische Raffinesse der Amerikaner im kalten Krieg führte 1969 zum Vorrang
+des Westens im Space Race. Technische Raffinesse, die vielleicht erst durch das Know-How ehemaliger deutscher Wissenschaftler entstanden ist. Durch das Geheimprojekt "Operation Paperclip" eigneten sich die USA den Wissenstand der Deutschen im Bereich der Langstreckenraketen an. Über den Lauf der Zeit wurde aus der Kriegswaffe "Aggregat 2" über die Jahre Saturn V.
+Mehr als hundert Wissenschaftler wurde im Zuge der Nachkriegszeit eingegliedert, um bei der Army, der Navy oder der späteren NASA zu arbeiten. Im Mittelpunkt der Geschichte steht der Chefingenieur verschiedener Raumfahrtprogamme, Charismat und das ehemalige Mitglied der NSDAP Wernher von Braun. Wie Wernhers Boys Kontakte dazu geführt haben, dass die Amerikaner 1969 sich zu den ersten Menschen auf dem Mond erklären konnten, untersuchen wir in den folgenden Netzwerken. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Kapitel 1: Datensatz einlesen}
+
+
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+op <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+op
+
+```
+
+
+
+```{r Kapitel 2: Gesamtnetzwerk, fig.height=20, fig.width=20}
+#	Personen	
+V(op)[V(op)$type	==	0]$shape	<-	"circle"	
+V(op)[V(op)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(op)[V(op)$type	==	1]$shape	<-	"square"	
+V(op)[V(op)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(op)[V(op)$type == 2]$shape <- "square"
+V(op)[V(op)$type == 2]$color <- "gray60"
+#Projekt
+V(op)[V(op)$type == 3]$shape <- "square"
+V(op)[V(op)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(op)[V(op)$type == 99]$shape <- "square"
+V(op)[V(op)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(op)[E(op)$wvb == 1]$color <- "red"
+E(op)[E(op)$wvb == 0]$color <- "gray10"
+
+list.vertex.attributes(op)	
+vertex.attributes(op)$shape	
+vertex.attributes(op)$color	
+edge.attributes(op)$color
+
+coords <- layout_with_kk(op)
+
+#V(op)$size	<-	degree(s,	mode="out")
+
+plot(op, 
+     edge.arrow.size=.05, 
+     layout=layout_nicely,
+     vertex.label.color= "black",
+     vertex.frame.color= "NA",
+     vertex.size= 2,
+     vertex.label.cex= .8,
+     main="Operation Paperclip",
+     sub="Evelyn Krix, Joel Lischka, Sophie Mineif, Christopher Müller, Moritz Osswald")
+
+
+```
+    
+```{r Daten Zeit 1 Einlesen}
+# Einlesen der Edgelist: beachte den Separator ","
+elt1 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist_Jahr1.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodest1 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist_Jahr1.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(elt1)
+head(nodest1)
+
+edgematrix <-as.matrix(elt1)
+
+t1 <- graph_from_data_frame(d=edgematrix, vertices=nodest1, directed=T)
+t1
+
+```
+    
+```{r Graph Zeit 1 (t1) Visualisierung}
+
+#	Personen	
+V(t1)[V(t1)$type	==	0]$shape	<-	"circle"	
+V(t1)[V(t1)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(t1)[V(t1)$type	==	1]$shape	<-	"square"	
+V(t1)[V(t1)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(t1)[V(t1)$type == 2]$shape <- "square"
+V(t1)[V(t1)$type == 2]$color <- "gray60"
+#Projekt
+V(t1)[V(t1)$type == 3]$shape <- "square"
+V(t1)[V(t1)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(t1)[V(t1)$type == 99]$shape <- "square"
+V(t1)[V(t1)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(t1)[E(t1)$wvb == 1]$color <- "red"
+E(t1)[E(t1)$wvb == 0]$color <- "gray10"
+
+list.vertex.attributes(t1)	
+vertex.attributes(t1)$shape	
+vertex.attributes(t1)$color	
+edge.attributes(t1)$color
+
+#V(t1)$size	<-	degree(t1,	mode="in")
+#V(t1)$size	<-	degree(t1,	mode="out")
+
+plot(t1,#delete.vertices(simplify(t1), degree(t1)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.color= "black",
+     vertex.label.cex=1,
+     main="Vor den Nazis",
+     sub= "Einfluss Wernher von Braun, Edges = red"
+     )
+
+```
+    
+```{r Daten Zeit 2 Einlesen}
+
+# Einlesen der Edgelist: beachte den Separator ","
+elt2 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist_Jahr2.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodest2 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist_Jahr2.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(elt2)
+head(nodest2)
+
+edgematrix <-as.matrix(elt2)
+
+t2 <- graph_from_data_frame(d=edgematrix, vertices=nodest2, directed=T)
+t2
+
+
+```
+    
+    
+```{r Graph Zeit 2 Visualisierung}
+
+#	Personen	
+V(t2)[V(t2)$type	==	0]$shape	<-	"circle"	
+V(t2)[V(t2)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(t2)[V(t2)$type	==	1]$shape	<-	"square"	
+V(t2)[V(t2)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(t2)[V(t2)$type == 2]$shape <- "square"
+V(t2)[V(t2)$type == 2]$color <- "gray60"
+#Projek
+V(t2)[V(t2)$type == 3]$shape <- "square"
+V(t2)[V(t2)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(t2)[V(t2)$type == 99]$shape <- "square"
+V(t2)[V(t2)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(t2)[E(t2)$wvb == 1]$color <- "red"
+E(t2)[E(t2)$wvb == 0]$color <- "gray10"
+
+list.vertex.attributes(t2)	
+vertex.attributes(t2)$shape	
+vertex.attributes(t2)$color	
+edge.attributes(t2)$color
+
+#V(t2)$size	<-	degree(t2,	mode="in")
+
+plot(delete.vertices(simplify(t2), degree(t2)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Nazizeit",
+     sub="Entwicklung allgemein"
+     )
+
+```
+    
+```{r Daten Zeit 2 Einlesen}
+
+# Einlesen der Edgelist: beachte den Separator ","
+elt3 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist_Jahr3.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodest3 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist_Jahr3.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(elt3)
+head(nodest3)
+
+edgematrix <-as.matrix(elt3)
+
+t3 <- graph_from_data_frame(d=edgematrix, vertices=nodest3, directed=T)
+t3
+```
+    
+```{r Graph Zeit 3 Visualisierung}
+#	Personen	
+V(t3)[V(t3)$type	==	0]$shape	<-	"circle"	
+V(t3)[V(t3)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(t3)[V(t3)$type	==	1]$shape	<-	"square"	
+V(t3)[V(t3)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(t3)[V(t3)$type == 2]$shape <- "square"
+V(t3)[V(t3)$type == 2]$color <- "gray60"
+#Projek
+V(t3)[V(t3)$type == 3]$shape <- "square"
+V(t3)[V(t3)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(t3)[V(t3)$type == 99]$shape <- "square"
+V(t3)[V(t3)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(t3)[E(t3)$wvb == 1]$color <- "red"
+E(t3)[E(t3)$wvb == 0]$color <- "gray10"
+
+list.vertex.attributes(t3)	
+vertex.attributes(t3)$shape	
+vertex.attributes(t3)$color	
+edge.attributes(t3)$color
+
+#V(t3)$size	<-	degree(t3,	mode="in")
+
+#Wenn du willst das die ohne Verbindung verschwinden musst du den Hashtag l?schen und das t4 auch, aber dann verschwinden auch die Einf?rbungen an den Kanten
+
+plot(delete.vertices(simplify(t3), degree(t3)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Vor NASA",
+     sub="Allgemeine Entwicklung"
+     )
+```
+    
+    
+```{r Daten Zeit 4 einlesen}
+# Einlesen der Edgelist: beachte den Separator ","
+elt4 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist_Jahr4.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodest4 <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist_Jahr4.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(elt4)
+head(nodest4)
+
+edgematrix <-as.matrix(elt4)
+
+t4 <- graph_from_data_frame(d=edgematrix, vertices=nodest4, directed=T)
+t4
+
+```
+
+    
+```{r Graph Zeit 4 Visualisieren}
+#	Personen	
+V(t4)[V(t4)$type	==	0]$shape	<-	"circle"	
+V(t4)[V(t4)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(t4)[V(t4)$type	==	1]$shape	<-	"square"	
+V(t4)[V(t4)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(t4)[V(t4)$type == 2]$shape <- "square"
+V(t4)[V(t4)$type == 2]$color <- "gray60"
+#Projek
+V(t4)[V(t4)$type == 3]$shape <- "square"
+V(t4)[V(t4)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(t4)[V(t4)$type == 99]$shape <- "square"
+V(t4)[V(t4)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(t4)[E(t4)$wvb == 1]$color <- "red"
+E(t4)[E(t4)$wvb == 0]$color <- "gray10"
+
+list.vertex.attributes(t4)	
+vertex.attributes(t4)$shape	
+vertex.attributes(t4)$color	
+edge.attributes(t4)$color
+
+V(t4)$size	<-	degree(t4,	mode="in")
+
+par(mfrow=c(2,2), mar=c(1,2,1,2)) 
+# --> wenn du hier den Hashtag l?schst, kannst du mehrere Graphen nebeneinander anzeigen lassen, daf?r musst du die anderen Zeitgraphen aber auch noch enthashtagen
+
+plot(t1,delete.vertices(simplify(t1), degree(t1)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+    vertex.label.cex=1,
+     main="Vor den Nazis")
+
+plot(t2,delete.vertices(simplify(t2), degree(t2)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.cex=1,
+     main="Nazizeit")
+
+plot(t3,delete.vertices(simplify(t3), degree(t3)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.cex=1,
+     main="Vor NASA"
+     )
+
+plot(t4,delete.vertices(simplify(t4), degree(t4)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 3,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="NASA"
+     )
+
+
+
+```
+  
+```{r t1 Personen Orte/ Projekte}
+
+#Personen und Orte
+P <- delete_vertices(t1, V(t1)[type == "1"])
+O <- delete_vertices(P, V(P)[type == "3"])
+PO <- delete_vertices(O, V(O)[type == "99"])
+#Personen und Projekte
+Pe <- delete_vertices(t1, V(t1)[type == "1"])
+Pr <- delete_vertices(Pe, V(Pe)[type == "2"])
+PP <- delete_vertices(Pr, V(Pr)[type == "99"])
+
+V(PP)$size	<-	degree(PP,	mode="out")
+
+plot(delete.vertices(simplify(PO), degree(PO)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.color= "black",
+     vertex.label.cex=1,
+     main="Personen und Orte",
+     sub= "Vertex size mode in")
+
+plot(delete.vertices(simplify(PP), degree(PP)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Personen und Projekte",
+     sub= "Vertex size mode out")
+
+```
+    
+```{r t2 Personen Orte/ Projekte}
+#Personen und Orte
+P <- delete_vertices(t2, V(t2)[type == "1"])
+O <- delete_vertices(P, V(P)[type == "3"])
+PO <- delete_vertices(O, V(O)[type == "99"])
+#Personen und Projekte
+Pe <- delete_vertices(t2, V(t2)[type == "1"])
+Pr <- delete_vertices(Pe, V(Pe)[type == "2"])
+PP <- delete_vertices(Pr, V(Pr)[type == "99"])
+
+V(PO)$size	<-	degree(PO,	mode="out")
+
+plot(delete.vertices(simplify(PO), degree(PO)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.color= "black",
+     vertex.label.cex=1,
+     main="Personen und Orte",
+     sub= "Vertex size mode out")
+
+plot(delete.vertices(simplify(PP), degree(PP)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Personen und Projekte",
+     sub= "Vertex size mode in")
+```
+    
+```{r t2 Personen Orte/ Projekte}
+#Personen und Orte
+P <- delete_vertices(t3, V(t3)[type == "1"])
+O <- delete_vertices(P, V(P)[type == "3"])
+PO <- delete_vertices(O, V(O)[type == "99"])
+#Personen und Projekte
+Pe <- delete_vertices(t3, V(t3)[type == "1"])
+Pr <- delete_vertices(Pe, V(Pe)[type == "2"])
+PP <- delete_vertices(Pr, V(Pr)[type == "99"])
+
+V(PP)$size	<-	degree(PP,	mode="out")
+
+plot(delete.vertices(simplify(PO), degree(PO)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.color= "black",
+     vertex.label.cex=1,
+     main="Personen und Orte",
+     sub= "Vertex size mode in")
+
+plot(delete.vertices(simplify(PP), degree(PP)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Personen und Projekte",
+     sub= "Vertex size mode out")
+```
+    
+```{r t4 Personen Orte/ Projekte}
+#Personen und Orte
+P <- delete_vertices(t4, V(t4)[type == "1"])
+O <- delete_vertices(P, V(P)[type == "3"])
+PO <- delete_vertices(O, V(O)[type == "99"])
+#Personen und Projekte
+Pe <- delete_vertices(t4, V(t4)[type == "1"])
+Pr <- delete_vertices(Pe, V(Pe)[type == "2"])
+PP <- delete_vertices(Pr, V(Pr)[type == "99"])
+
+V(PP)$size	<-	degree(PP,	mode="in")
+
+plot(delete.vertices(simplify(PO), degree(PO)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.color= "black",
+     vertex.label.cex=1,
+     main="Personen und Orte",
+     sub= "Vertex size mode out")
+
+plot(delete.vertices(simplify(PP), degree(PP)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=1,
+     vertex.label.color= "black",
+     main="Personen und Projekte",
+     sub= "Vertex size mode in")
+
+```
+    
+    
+```{r Kapitel 3: Zeitspalten}
+#bis 5.3.1933
+VN <- delete_edges(op, E(op)[year> "1"])
+#bis 8.5.1945
+N <- delete_edges(op, E(op)[year>"2"])
+NZ <- delete_edges(N, E(N)[year<"2"])
+#bis 29.7.1958
+NS <- delete_edges(op, E(op)[year>"3"])
+NASA <- delete_edges(NS, E(NS)[year<"3"])
+#bis Ende 1972
+AP <- delete_edges(op, E(op)[year<"4"])
+
+
+
+edge.attributes(VN)$color
+ 
+#V(op)$size	<-	degree(s,	mode="out")
+
+par(mfrow=c(2,2), mar=c(1,2,1,2))
+
+plot(VN,#delete.vertices(simplify(VN), degree(VN)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     vertex.size= 5,
+     vertex.label.cex=.2,
+     main="Vor den Nazis"
+     )
+
+plot(delete.vertices(simplify(NZ), degree(NZ)==0),
+     layout=layout_with_kk,
+     edge.arrow.size=.05,
+     vertex.size= 5,
+     vertex.label.cex=.2,
+     main="Nazizeit"
+     )
+
+plot(delete.vertices(simplify(NASA), degree(NASA)==0),
+     layout=layout_with_kk,
+     edge.arrow.size=.05,
+     vertex.size= 5,
+     vertex.label.cex=.2,
+     main="Vor NASA"
+     )
+
+plot(delete.vertices(simplify(AP), degree(AP)==0),
+     layout=layout_with_kk,
+     edge.arrow.size=.05,
+     vertex.size= 5,
+     vertex.label.cex=.2,
+     main="NASA"
+     )
+
+```
+    
+```{r Kapitel 4: Orte und Personen}
+#Personen und Orte
+P <- delete_vertices(op, V(op)[type == "1"])
+O <- delete_vertices(P, V(P)[type == "3"])
+PO <- delete_vertices(O, V(O)[type == "99"])
+#Personen und Projekte
+Pe <- delete_vertices(op, V(op)[type == "1"])
+Pr <- delete_vertices(Pe, V(Pe)[type == "2"])
+PP <- delete_vertices(Pr, V(Pr)[type == "99"])
+
+V(op)$size	<-	degree(op,	mode="in")
+
+plot(delete.vertices(simplify(PO), degree(PO)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=.9,
+     main="Personen und Orte")
+
+plot(delete.vertices(simplify(PP), degree(PP)==0),
+     layout=layout_nicely,
+     edge.arrow.size=.05,
+     #vertex.size= 5,
+     vertex.label.cex=.9,
+     main="Personen und Orte")
+
+
+
+
+```
+    
+    ```{r Kapitel 5: Egonetzwerk Braun}
+    
+ego_size(op)
+    
+degree(op)
+    
+Braunego <- make_ego_graph(op,order= 1, nodes = V(op)$name == "Braun", mode ="all")
+
+Braunego
+
+plot (Braunego[[1]],
+     layout=layout_with_kk,
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     edge.color="grey80",
+     edge.arrow.size=.1,
+     main="Die Zentralität von Wernher von Braun", cex.main = 1, font.main= 4, col.main= "red",
+     sub="n=63")
+
+```
+
+```{r Netzwerkmaße }
+vcount(Braunego[[1]])
+ecount(Braunego[[1]])
+
+list.edge.attributes(Braunego[[1]])
+list.vertex.attributes(Braunego[[1]])
+
+# Indegree
+degree(Braunego[[1]], mode="in")
+centr_degree(Braunego[[1]], mode="in", normalized=T)
+
+# Outdegree
+degree(Braunego[[1]], mode="out")
+centr_degree(Braunego[[1]], mode="out", normalized=T)
+```
+
+```{r}
+eigen_centrality(Braunego[[1]], directed=T, weights=NA)
+centr_eigen(Braunego[[1]], directed=T, normalized=T)
+```
+
+```{r}
+triad_census(Braunego[[1]])
+count_triangles(Braunego[[1]])
+
+
+largest_cliques(Braunego[[1]])
+```
+
+```{r}
+edge_density(Braunego[[1]], loops = FALSE)
+
+
+degree(Braunego[[1]], mode = "in")
+```
+
+```{r}
+# Dichte 
+edge_density(Braunego [[1]])
+## 7% aller Edges sind miteinander verbunden
+
+# Triaden 
+triad.census(Braunego [[1]])
+#Das Ego-Netzwerk enthält keine Triaden
+
+
+#cliques
+#cliques(Braunego [[1]])
+#Es gibt 749 Cliquen
+
+largest_cliques(Braunego [[1]])
+#Die größte Clique hat fünf Knoten und besteht aus Braun, Apollo, Huntsville, Debus und KSC
+
+#Pfaddistanz
+farthest_vertices(Braunego [[1]])
+#Der weiteste Knoten ist nur zwei weitere Knoten von Braun entfernt 
+```
+
+
+```{r}
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t1)%20-%20Edgelist_Jahr1.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t1)%20-%20Nodelist_Jahr1.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+#	Personen	
+V(t3)[V(t3)$type	==	0]$shape	<-	"circle"	
+V(t3)[V(t3)$type	==	0]$color	<-	"gray30"
+#	Organisationen	
+V(t3)[V(t3)$type	==	1]$shape	<-	"square"	
+V(t3)[V(t3)$type	==	1]$color	<-	"gray50"	
+#Orte
+V(t3)[V(t3)$type == 2]$shape <- "square"
+V(t3)[V(t3)$type == 2]$color <- "gray60"
+#Projek
+V(t3)[V(t3)$type == 3]$shape <- "square"
+V(t3)[V(t3)$type == 3]$color <- "gray70"
+#Gefangenschaft
+V(t3)[V(t3)$type == 99]$shape <- "square"
+V(t3)[V(t3)$type == 99]$color <- "gray80"
+#Wernhers Einfluss
+E(t3)[E(t3)$wvb == 1]$color <- "red"
+E(t3)[E(t3)$wvb == 0]$color <- "gray10"
+
+
+t1 <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+t1
+
+Braunegot1 <- make_ego_graph(t1,order= 1, nodes = "Braun", mode ="all")
+Braunegot1 
+
+plot (Braunegot1[[1]],
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     edge.color="grey80",
+     vertex.color="grey",
+     edge.arrow.size=.1,
+     main="Die Beziehungen des Wernher von Braun (t1)", cex.main = 1, font.main= 4, col.main= "red",
+     sub="Vor Nazi")
+```
+```{r}
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Edgelist_Jahr2.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Kopie%20von%20XXL_Netzwerk%20-%20Nodelist_Jahr2.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+t2 <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+t2
+
+Braunegot2 <- make_ego_graph(t2,order= 1, nodes = "Braun", mode ="all")
+Braunegot2 
+
+plot (Braunegot2[[1]],
+     layout=layout_with_kk,
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     vertex.color="grey",
+     edge.color="grey80",
+     edge.arrow.size=.1,
+     main="Die Beziehungen des Wernher von Braun (t2)", cex.main = 1, font.main= 4, col.main= "red",
+     sub="Nazizeit")
+```
+
+```{r}
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t4)%20-%20Edgelist_Jahr4.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t4)%20-%20Nodelist_Jahr4.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+t4 <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+t4
+
+Braunegot4 <- make_ego_graph(t4,order= 1, nodes = "Braun", mode ="all")
+Braunegot4 
+
+plot (Braunegot4[[1]],
+     layout=layout_with_kk,
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     vertex.color="grey",
+     edge.color="grey80",
+     edge.arrow.size=.1,
+     main="Die Beziehungen des Wernher von Braun (t4)", cex.main = 1, font.main= 4, col.main= "red",
+     sub="NASA")
+```
+
+```{r}
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t3)%20-%20Edgelist_Jahr3.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/Ego/master/Ego-Netzwerk%20(t3)%20-%20Nodelist_Jahr3.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+t3 <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+t3
+
+Braunegot3 <- make_ego_graph(t3,order= 1, nodes = "Braun", mode ="all")
+Braunegot3 
+
+plot (Braunegot3[[1]],
+     layout=layout_with_kk,
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     edge.color="grey80",
+     edge.arrow.size=.1,
+     main="Die Beziehungen des Wernher von Braun (t3)", cex.main = 1, font.main= 4, col.main= "red",
+     sub="vor NASA")
+```
+
+```{r Kapitel 5: Die persönlichen Kontakte des Wernher von Braun}
+
+# Einlesen der Edgelist: beachte den Separator ","
+el <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Ego-Netzwerk_nur%20Personen%20-%20Edgelist.csv", header=T, as.is=T, sep = ",")
+# Einlesen der Nodelist
+nodes <- read.csv("https://raw.githubusercontent.com/OperationPaperclip/XXL_Liste/master/Ego-Netzwerk_nur%20Personen%20-%20Nodelist.csv", header=T, as.is=T, sep = ",")
+# Überprüfen der Daten
+head(el)
+head(nodes)
+
+edgematrix <-as.matrix(el)
+
+bez <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=T)
+bez
+
+Braunego1 <- make_ego_graph(bez,order= 1, nodes = V(bez)$name == "Braun", mode ="all")
+
+Braunego1
+
+
+plot (Braunego1[[1]],
+     layout=layout_with_kk,
+     vertex.size=10, 
+     edge.size=0.1,
+     vertex.size=10,
+     vertex.frame.color="NA",
+     vertex.label.degree=0, 
+     vertex.color="grey",
+     edge.color="grey80",
+     edge.arrow.size=.1,
+     main="Die persönlichen Beziehungen des Wernher von Braun", cex.main = 1, font.main= 4, col.main= "red",
+     sub="Vor Nazi, Nazi, Vor NASA, NASA")
+```
+
+
